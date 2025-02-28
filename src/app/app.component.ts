@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { AppService } from './app.service';
 import { OmdbDetailsResponse } from '../models/omdb-details-response.model';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -6,14 +6,14 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
-
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [MatTableModule, MatSortModule, CdkDropList, CdkDrag],
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
     private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -224,7 +224,7 @@ export class AppComponent {
 
     @ViewChild(MatSort) sort!: MatSort;
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.dataSource.sort = this.sort;
     }
 

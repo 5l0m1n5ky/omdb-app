@@ -10,9 +10,9 @@
   <section
     class="mx-24 mb-16 h-auto rounded-[25px] bg-[#e0e0e0] shadow-[18px_18px_32px_#969696,_-18px_-18px_32px_#ffffff] py-5 px-5">
 
-
+    <!-- <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"> -->
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" cdkDropList
-      (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal" class="mat-elevation-z8">
+      (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
 
       <ng-container matColumnDef="Poster">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number" cdkDrag>
@@ -20,7 +20,7 @@
         </th>
         <td mat-cell *matCellDef="let element">
           <img [src]="element.Poster" onerror="this.src='placeholders/movie-poster-placeholder.jpg'" alt="movie-poster"
-            class="max-w-[125px] rounded-md h-auto shadow-xl shadow-stone-700/60">
+            class="max-w-[125px] rounded-md h-auto my-8">
         </td>
       </ng-container>
 
