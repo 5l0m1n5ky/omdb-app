@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ViewChild, ViewEncapsulation, inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { AppService } from './app.service';
 import { OmdbDetailsResponse } from '../models/omdb-details-response.model';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -13,7 +14,7 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
 
     private _liveAnnouncer = inject(LiveAnnouncer);
 
@@ -22,7 +23,9 @@ export class AppComponent implements AfterViewInit {
     isLoading: boolean = false;
     tableColumns = ['Poster', 'Title', 'Year', 'Runtime', 'Genre', 'Director', 'Plot'];
 
-    isProcessing: boolean = true;
+    isProcessing: boolean = false;
+
+    searchResultsSubscription: Subscription | undefined;
 
     omdbMovieData: OmdbDetailsResponse[] = [
         // {
@@ -226,6 +229,8 @@ export class AppComponent implements AfterViewInit {
 
     @ViewChild(MatSort) sort!: MatSort;
 
+    constructor(private appService: AppService) { }
+
     ngAfterViewInit(): void {
         this.dataSource.sort = this.sort;
     }
@@ -243,6 +248,25 @@ export class AppComponent implements AfterViewInit {
         moveItemInArray(this.tableColumns, event.previousIndex, event.currentIndex);
     }
 
-    constructor(private appService: AppService) { }
+    onSearchbarChange(event: Event) {
 
+        this.searchResultsSubscription?.unsubscribe();
+
+
+        this.isLoading = true;
+
+        this.dataSource = new MatTableDataSource();
+        this.omdbMovieData = [];
+
+        this.searchResultsSubscription = this.appService.searchResults((event.target as HTMLInputElement).value).subscribe(results => {
+            this.dataSource = new MatTableDataSource(results);
+            this.omdbMovieData = results;
+            this.dataSource.sort = this.sort;
+            this.isLoading = false;
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.searchResultsSubscription?.unsubscribe();
+    }
 }
