@@ -2,7 +2,7 @@ import { Rating } from "./rating.model";
 
 export interface OmdbDetailsResponse {
     Title: string,
-    Year: number,
+    Year: string,
     Rated: string,
     Released: string,
     Runtime: string,
@@ -16,15 +16,15 @@ export interface OmdbDetailsResponse {
     Awards: string,
     Poster: string,
     Ratings: Rating[],
-    Metascore: number,
-    imdbRating: number,
-    imdbVotes: number,
+    Metascore: string,
+    imdbRating: string,
+    imdbVotes: string,
     imdbID: string,
     Type: string,
+    totalSeasons?: string
     DVD: string,
     BoxOffice: string,
     Production: string,
     Website: string,
-    Response: boolean,
+    Response: string,
 }
-
