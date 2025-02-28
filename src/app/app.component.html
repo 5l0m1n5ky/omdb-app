@@ -2,7 +2,7 @@
   <header class="flex items-center justify-start mx-10 pt-16 pb-6">
     <div class="relative">
       <input type="text" placeholder="Search"
-        class="w-10 pl-4 pr-20 text-stone-600 outline-none border-0 p-2 rounded-full bg-[#e0e0e0] shadow-[30px_30px_60px_#c5c5c5,-30px_-30px_60px_#ffffff] transition-all duration-300 focus:w-[500px] focus:outline-[#e8e8e8] focus:bg-[#e8e8e8] focus:shadow-[inset_20px_20px_60px_#c5c5c5,inset_-20px_-20px_60px_#ffffff] focus:transition-all focus:duration-300">
+        class="w-10 pl-4 pr-20 text-stone-600 outline-none border-0 p-2 rounded-full bg-[#e0e0e0] shadow-[30px_30px_60px_#c5c5c5,-30px_-30px_60px_#ffffff] transition-all duration-300 focus:w-[75vw] focus:outline-[#e8e8e8] focus:bg-[#e8e8e8] focus:shadow-[inset_20px_20px_60px_#c5c5c5,inset_-20px_-20px_60px_#ffffff] focus:transition-all focus:duration-300">
       <img src="icons/search-icon.png" alt="search-icon"
         class="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5">
     </div>
@@ -61,5 +61,15 @@
       <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
+    @if (omdbMovieData.length === 0) {
+    <div class="pl-5 py-24 text-xs">
+      Brak danych. Rozpocznij wyszukiwanie lub zmień kryteria wyszukiwania
+    </div>
+    }
+    @if (isProcessing) {
+    <div class="pl-5 py-24 text-xs">
+      Ładowanie danych ... 
+    </div>
+    }
   </section>
 </main>
