@@ -18,7 +18,7 @@ export interface OmdbDetailsResponse {
     Ratings: Rating[],
     Metascore: number,
     imdbRating: number,
-    imdbVotes: string,
+    imdbVotes: number,
     imdbID: string,
     Type: string,
     DVD: string,
