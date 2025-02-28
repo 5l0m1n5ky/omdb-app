@@ -1,37 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, inject } from '@angular/core';
 import { AppService } from './app.service';
 import { OmdbDetailsResponse } from '../models/omdb-details-response.model';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [],
+    imports: [MatTableModule, MatSortModule],
     templateUrl: './app.component.html'
 })
 export class AppComponent {
 
+    private _liveAnnouncer = inject(LiveAnnouncer);
+
     query: string = 'nolan';
     movies: any[] = [];
     isLoading: boolean = false;
-    tableHeaders = ["Poster", "Title", "Year", "Runtime", "Genre", "Director", "Plot"];
+    tableColumns = ['Poster', 'Title', 'Year', 'Runtime', 'Genre', 'Director', 'Plot'];
 
     omdbMovieData: OmdbDetailsResponse[] = [
         {
-            "Title": "Facing Nolan",
-            "Year": "2022",
-            "Rated": "TV-14",
-            "Released": "12 Mar 2022",
-            "Runtime": "102 min",
-            "Genre": "Documentary, Biography, Sport",
-            "Director": "Bradley Jackson",
-            "Writer": "Bradley Jackson",
-            "Actors": "Alan Ashby, Buzzie Bavasi, Craig Biggio",
-            "Plot": "In the world of Major League Baseball no one has created a mythology like Nolan Ryan. Told from the point of view of the hitters who faced him and the teammates who revered him, Facing Nolan is the definitive documentary of a Texa...",
-            "Language": "English",
-            "Country": "United States",
-            "Awards": "1 nomination total",
-            "Poster": "https://m.media-amazon.com/images/M/MV5BNWQ0ZjAwZDYtNTM0NS00Y2I4LWEzODYtZDgyMTZlZjUzYmExXkEyXkFqcGc@._V1_SX300.jpg",
-            "Ratings": [
+            Title: "Facing Nolan",
+            Year: "2022",
+            Rated: "TV-14",
+            Released: "12 Mar 2022",
+            Runtime: "102 min",
+            Genre: "Documentary, Biography, Sport",
+            Director: "Bradley Jackson",
+            Writer: "Bradley Jackson",
+            Actors: "Alan Ashby, Buzzie Bavasi, Craig Biggio",
+            Plot: "In the world of Major League Baseball no one has created a mythology like Nolan Ryan. Told from the point of view of the hitters who faced him and the teammates who revered him, Facing Nolan is the definitive documentary of a Texa...",
+            Language: "English",
+            Country: "United States",
+            Awards: "1 nomination total",
+            Poster: "https://m.media-amazon.com/images/M/MV5BNWQ0ZjAwZDYtNTM0NS00Y2I4LWEzODYtZDgyMTZlZjUzYmExXkEyXkFqcGc@._V1_SX300.jpg",
+            Ratings: [
                 {
                     "Source": "Internet Movie Database",
                     "Value": "7.9/10"
@@ -45,16 +50,16 @@ export class AppComponent {
                     "Value": "73/100"
                 }
             ],
-            "Metascore": "73",
-            "imdbRating": "7.9",
-            "imdbVotes": "1,922",
-            "imdbID": "tt17511190",
-            "Type": "movie",
-            "DVD": "N/A",
-            "BoxOffice": "$405,797",
-            "Production": "N/A",
-            "Website": "N/A",
-            "Response": "True"
+            Metascore: "73",
+            imdbRating: "7.9",
+            imdbVotes: "1,922",
+            imdbID: "tt17511190",
+            Type: "movie",
+            DVD: "N/A",
+            BoxOffice: "$405,797",
+            Production: "N/A",
+            Website: "N/A",
+            Response: "True"
         },
         {
             "Title": "The Director's Notebook: The Cinematic Sleight of Hand of Christopher Nolan",
@@ -213,6 +218,25 @@ export class AppComponent {
         }
     ];
 
+    dataSource = new MatTableDataSource(this.omdbMovieData);
+
+    @ViewChild(MatSort) sort!: MatSort;
+
+    ngAfterViewInit() {
+        this.dataSource.sort = this.sort;
+    }
+
+    announceSortChange(sortState: Sort) {
+        // This example uses English messages. If your application supports
+        // multiple language, you would internationalize these strings.
+        // Furthermore, you can customize the message to add additional
+        // details about the values being sorted.
+        if (sortState.direction) {
+            this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+        } else {
+            this._liveAnnouncer.announce('Sorting cleared');
+        }
+    }
 
     constructor(private appService: AppService) { }
 
