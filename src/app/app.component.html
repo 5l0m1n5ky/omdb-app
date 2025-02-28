@@ -1,10 +1,11 @@
-<main class="w-full h-full flex-col items-center justify-center">
-  <header class="flex items-center justify-center pt-10">
+<main class="w-full h-full flex-col items-center justify-start">
+  <header class="flex items-center justify-center mt-10 mx-24 py-5">
     <input type="text" class="border-2 min-w-[500px]">
+     header
   </header>
-  <section class="w-full px-24 py-16 h-auto">
+  <section class="w-full px-24 pb-16 h-auto">
     <table class="border-2">
-      <tr>
+      <tr class="">
         @for (tableHeader of tableHeaders; track tableHeader) {
         <th>{{ tableHeader }}</th>
         }
@@ -12,7 +13,7 @@
       @for (movieItem of omdbMovieData; track movieItem.imdbID) {
       <tr class="text-center">
         <td>
-          <img [src]="movieItem.Poster" alt="movie poster" class="max-w-[150px] h-auto object-cover">
+          <img [src]="movieItem.Poster" alt="movie poster" class="max-w-[150px] rounded-md h-auto object-cover">
         </td>
         <td>
           {{ movieItem.Title }}
