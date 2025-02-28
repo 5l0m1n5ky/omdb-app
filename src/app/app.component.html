@@ -1,0 +1,39 @@
+<main class="w-full h-full flex-col items-center justify-center">
+  <header class="flex items-center justify-center pt-10">
+    <input type="text" class="border-2 min-w-[500px]">
+  </header>
+  <section class="w-full px-24 py-16 h-auto">
+    <table class="border-2">
+      <tr>
+        @for (tableHeader of tableHeaders; track tableHeader) {
+        <th>{{ tableHeader }}</th>
+        }
+      </tr>
+      @for (movieItem of omdbMovieData; track movieItem.imdbID) {
+      <tr class="text-center">
+        <td>
+          <img [src]="movieItem.Poster" alt="movie poster" class="max-w-[150px] h-auto object-cover">
+        </td>
+        <td>
+          {{ movieItem.Title }}
+        </td>
+        <td>
+          {{ movieItem.Year }}
+        </td>
+        <td>
+          {{ movieItem.Runtime }}
+        </td>
+        <td>
+          {{ movieItem.Genre }}
+        </td>
+        <td>
+          {{ movieItem.Director }}
+        </td>
+        <td>
+          {{ movieItem.Plot }}
+        </td>
+      </tr>
+      }
+    </table>
+  </section>
+</main>
