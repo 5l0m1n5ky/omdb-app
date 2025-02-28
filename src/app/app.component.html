@@ -1,5 +1,5 @@
-<main class="w-full min-h-screen flex-col items-center justify-start bg-[#e0e0e0] pb-16">
-  <header class="flex items-center justify-start mx-24 pt-16 pb-6">
+<main class="min-w-full min-h-screen flex-col items-center justify-start bg-[#e0e0e0] pb-16 overflow-x-auto">
+  <header class="flex items-center justify-start mx-10 pt-16 pb-6">
     <div class="relative">
       <input type="text" placeholder="Search"
         class="w-10 pl-4 pr-20 text-stone-600 outline-none border-0 p-2 rounded-full bg-[#e0e0e0] shadow-[30px_30px_60px_#c5c5c5,-30px_-30px_60px_#ffffff] transition-all duration-300 focus:w-[500px] focus:outline-[#e8e8e8] focus:bg-[#e8e8e8] focus:shadow-[inset_20px_20px_60px_#c5c5c5,inset_-20px_-20px_60px_#ffffff] focus:transition-all focus:duration-300">
@@ -7,13 +7,11 @@
         class="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5">
     </div>
   </header>
-  <section
-    class="mx-24 mb-16 h-auto rounded-[25px] bg-[#e0e0e0] shadow-[18px_18px_32px_#969696,_-18px_-18px_32px_#ffffff] py-5 px-5">
 
-    <!-- <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"> -->
+  <section
+    class="mb-16 px-10 py-5 mx-10 h-auto rounded-[25px] bg-[#e0e0e0] shadow-[18px_18px_32px_#969696,_-18px_-18px_32px_#ffffff] overflow-x-auto">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" cdkDropList
       (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
-
       <ng-container matColumnDef="Poster">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number" cdkDrag>
           Poster
@@ -23,49 +21,43 @@
             class="max-w-[125px] rounded-md h-auto my-8">
         </td>
       </ng-container>
-
       <ng-container matColumnDef="Title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name" cdkDrag>
           Title
         </th>
         <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
       </ng-container>
-
       <ng-container matColumnDef="Year">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight" cdkDrag>
           Year
         </th>
         <td mat-cell *matCellDef="let element"> {{element.Year}} </td>
       </ng-container>
-
       <ng-container matColumnDef="Runtime">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol" cdkDrag>
           Runtime
         </th>
         <td mat-cell *matCellDef="let element"> {{element.Runtime}} </td>
       </ng-container>
-
       <ng-container matColumnDef="Genre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol" cdkDrag>
           Genre
         </th>
         <td mat-cell *matCellDef="let element"> {{element.Genre}} </td>
       </ng-container>
-
       <ng-container matColumnDef="Director">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol" cdkDrag>
           Director
         </th>
         <td mat-cell *matCellDef="let element"> {{element.Director}} </td>
       </ng-container>
-
       <ng-container matColumnDef="Plot">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol" cdkDrag>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol" cdkDrag
+          style="min-width: 250px;">
           Plot
         </th>
-        <td mat-cell *matCellDef="let element"> {{element.Plot}} </td>
+        <td mat-cell *matCellDef="let element" style="min-width: 250px;"> {{element.Plot}} </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>

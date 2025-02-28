@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { AppService } from './app.service';
 import { OmdbDetailsResponse } from '../models/omdb-details-response.model';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -11,7 +11,8 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk
     standalone: true,
     imports: [MatTableModule, MatSortModule, CdkDropList, CdkDrag],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    // encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit {
 

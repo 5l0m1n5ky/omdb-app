@@ -23,6 +23,6 @@
      background-color: transparent;
  }
 
- .mat-cell {
-     text-align: center;
+ table td {
+    color: #757575;
  }
