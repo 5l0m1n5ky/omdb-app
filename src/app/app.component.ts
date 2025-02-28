@@ -63,7 +63,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.searchResultsSubscription?.unsubscribe();
 
-
         this.isLoading = true;
 
         this.dataSource = new MatTableDataSource();

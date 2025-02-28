@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 @import "tailwindcss";
 
-/* html, body { height: 100%; } */
-body { 
-    /* margin: 0;  */
+body {
     font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
 }
